@@ -1,5 +1,8 @@
 var fs = require('fs');
-fs.readFile(process.argv[2], function(err, data) {
-    if (err) throw err;
-    console.log(data.toString().split('\n').length - 1);
+fs.readdir(process.argv[2], function(err, files) {
+   if (err) throw err;
+   var extention = process.argv[3];
+   files.forEach(function(file) {
+       if (file.endsWith(`.${extention}`)) console.log(file);
+   });
 });
