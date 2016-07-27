@@ -1,8 +1,6 @@
-var fs = require('fs');
-fs.readdir(process.argv[2], function(err, files) {
-   if (err) throw err;
-   var extention = process.argv[3];
-   files.forEach(function(file) {
-       if (file.endsWith(`.${extention}`)) console.log(file);
-   });
+var mymodule = require('./filter_files');
+
+mymodule(process.argv[2], process.argv[3], function(err, data) {
+    if (err) return console.error(err);
+    data.forEach(function(d) { console.log(d) });
 });
