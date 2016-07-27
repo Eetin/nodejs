@@ -1,1 +1,1 @@
-console.log("HELLO WORLD");
+console.log(process.argv.slice(2, process.argv.length).reduce((a, b) => +a + +b, 0));
