@@ -1,6 +1,7 @@
-var mymodule = require('./filter_files');
+var http = require('http');
 
-mymodule(process.argv[2], process.argv[3], function(err, data) {
-    if (err) return console.error(err);
-    data.forEach(function(d) { console.log(d) });
-});
+http.get(process.argv[2], function(response) {
+    response.setEncoding('utf8');
+    response.on('data', console.log);
+    response.on('error', console.error);
+}).on('error', console.error);
