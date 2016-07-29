@@ -1,9 +1,9 @@
 "use strict";
-const fs = require('fs')
 const http = require('http')
+const map = require('through2-map')
 
 const server = http.createServer((req, res) => {
-    res.writeHead(200, { 'content-type': 'text/plain' })
-    fs.createReadStream(process.argv[3]).pipe(res)
+    if (req.method != 'POST') return res.end('send me a POST\n')
+    req.pipe(map(chunk => chunk.toString().toUpperCase())).pipe(res)
 })
 server.listen(+process.argv[2]);
