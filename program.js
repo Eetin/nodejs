@@ -1,8 +1,9 @@
 "use strict";
-const net = require('net')
-const strftime = require('strftime')
+const fs = require('fs')
+const http = require('http')
 
-const server = net.createServer(socket => {
-    socket.end(`${strftime('%Y-%m-%d %H:%M')}\n`);
+const server = http.createServer((req, res) => {
+    res.writeHead(200, { 'content-type': 'text/plain' })
+    fs.createReadStream(process.argv[3]).pipe(res)
 })
 server.listen(+process.argv[2]);
